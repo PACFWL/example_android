@@ -1,4 +1,4 @@
-package com.example.legato.adapter;
+package com.exa.example.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
