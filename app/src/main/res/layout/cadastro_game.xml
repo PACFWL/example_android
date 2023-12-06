@@ -79,6 +79,5 @@
         android:id="@+id/btnSalvarGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorGreen"
         android:text="Salvar" />
 </LinearLayout>

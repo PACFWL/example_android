@@ -17,6 +17,6 @@ public class VerticalListGames extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.vertical_list_games_l, container, false);
+        return inflater.inflate(R.layout.activity_main, container, false);
     }
 }

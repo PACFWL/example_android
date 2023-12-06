@@ -61,7 +61,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
             @Override
             public void onClick(View v) {
 
-Context activityContext = null;
+            Context activityContext = null;
 
                 if (v.getContext() instanceof Activity) {
                     activityContext = (Activity) v.getContext();
@@ -76,7 +76,7 @@ Context activityContext = null;
                         .setExpanded(true, 700)
                         .create();
 //
-View view = dialogPlus.getHolderView();
+                    View view = dialogPlus.getHolderView();
 
                     EditText name = view.findViewById(R.id.txtGameNomeUpdate);
                     EditText platform = view.findViewById(R.id.txtGamePlataformaUpdate);
@@ -132,14 +132,14 @@ View view = dialogPlus.getHolderView();
                 });
 
                
-               //
+
                
                } else {
                     Log.e("GamesAdapter", "Error: Unable to get the activity context");
                 }
                
                
-                // ...
+
             }
         });
 
@@ -184,13 +184,14 @@ View view = dialogPlus.getHolderView();
     }
 
     public static class GamesViewHolder extends RecyclerView.ViewHolder {
-        TextView Name, SourceSite, Platform, ReleaseDate, Developer;
+  
+        TextView Id, Name, SourceSite, Platform, ReleaseDate, Developer;
         Button btnEditGame, btnDeleteGame;
 
         public GamesViewHolder(@NonNull View itemView) {
             super(itemView);
-    
-Id = itemView.findViewById(R.id.txtIdGame);
+
+            Id = itemView.findViewById(R.id.txtIdGame);
             Name = itemView.findViewById(R.id.txtNameGame);
             SourceSite = itemView.findViewById(R.id.txtSourceSiteGame);
             Platform = itemView.findViewById(R.id.txtPlatformGame);
