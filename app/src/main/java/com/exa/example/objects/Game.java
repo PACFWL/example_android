@@ -1,6 +1,7 @@
-package com.example.legato.objects;
+package com.exa.example.objects;
 
-public class Games {
+public class Game {
+	private String id;
     private String name;
     private String sourceSite;
     private String platform;
@@ -8,13 +9,14 @@ public class Games {
     private String developer;
 
     // Default constructor
-    public Games() {
+    public Game() {
         // Default constructor with no parameters
     }
 
     // Parameterized constructor
-    public Games(String name, String sourceSite, String platform, String releaseDate, String developer) {
-        this.name = name;
+    public Game(String id, String name, String sourceSite, String platform, String releaseDate, String developer) {
+     this.id = id;
+   this.name = name;
         this.sourceSite = sourceSite;
         this.platform = platform;
         this.releaseDate = releaseDate;
@@ -22,7 +24,16 @@ public class Games {
     }
 
     // Getter and setter methods for name
-    public String getName() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+public String getName() {
         return name;
     }
 

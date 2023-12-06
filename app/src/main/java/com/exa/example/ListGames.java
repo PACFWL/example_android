@@ -1,4 +1,4 @@
-package com.example.legato;
+package com.exa.example;
 
 import android.os.Bundle;
 
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.legato.adapter.GamesAdapter;
-import com.example.legato.objects.Games;
+import com.exa.example.adapter.GamesAdapter;
+import com.exa.example.objects.Game;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +22,7 @@ public class ListGames extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference database;
     GamesAdapter gamesAdapter;
-    ArrayList<Games> list;
+    ArrayList<Game> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -47,7 +47,7 @@ public class ListGames extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();  // Limpa a lista antes de adicionar novos dados
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Games game = dataSnapshot.getValue(Games.class);
+                    Game game = dataSnapshot.getValue(Game.class);
                     list.add(game);
                 }
                 gamesAdapter.notifyDataSetChanged();

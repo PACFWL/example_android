@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.legato.R;
-import com.example.legato.objects.Games;
+import com.exa.example.R;
+import com.exa.example.objects.Game;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +31,10 @@ import java.util.Map;
 
 public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHolder> {
     private Context context;
-    private List<Games> list;
+    private List<Game> list;
     private DatabaseReference databaseReference;
 
-    public GamesAdapter(Context context, List<Games> list, DatabaseReference databaseReference) {
+    public GamesAdapter(Context context, List<Game> list, DatabaseReference databaseReference) {
         this.context = context;
         this.list = list;
         this.databaseReference = databaseReference;
@@ -49,7 +49,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GamesAdapter.GamesViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Games game = list.get(position);
+        Game game = list.get(position);
 
         holder.Name.setText(game.getName());
         holder.Platform.setText(game.getPlatform());
@@ -60,15 +60,44 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
         holder.btnEditGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ... (similar code as in ArtistaAdapter)
 
-                // Example: Replace R.layout.artist_update_popup with R.layout.game_update_popup
+Context activityContext = null;
+
+                if (v.getContext() instanceof Activity) {
+                    activityContext = (Activity) v.getContext();
+                } else if (v.getContext() instanceof ContextThemeWrapper) {
+                    activityContext = ((ContextThemeWrapper) v.getContext()).getBaseContext();
+                }
+
+                if (activityContext != null) {
+
                 final DialogPlus dialogPlus = DialogPlus.newDialog(activityContext)
                         .setContentHolder(new ViewHolder(R.layout.game_update_popup))
                         .setExpanded(true, 700)
                         .create();
+//
+View view = dialogPlus.getHolderView();
 
-                // ... (similar code as in ArtistaAdapter)
+                    EditText name = view.findViewById(R.id.txtGameNomeUpdate);
+                    EditText platform = view.findViewById(R.id.txtGamePlataformaUpdate);
+                    EditText releaseDate = view.findViewById(R.id.txtGameDataLancamentoUpdate);
+                    EditText developer = view.findViewById(R.id.txtGameDeveloper);
+                    EditText sourceSite = view.findViewById(R.id.txtGameSourceSite);
+                    
+                    Button btnUpdate = view.findViewById(R.id.btnAtualizarJogo);
+                    
+                    name.setText(game.getName());
+                    sourceSite.setText(game.getSourceSite());
+                    platform.setText(game.getPlatform());
+                    developer.setText(game.getDeveloper());
+                    releaseDate.setText(game.getReleaseDate());
+
+    
+                    dialogPlus.show();
+
+
+
+                // ... 
 
                 btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,8 +132,14 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
                 });
 
                
+               //
                
-                // ... (similar code as in ArtistaAdapter)
+               } else {
+                    Log.e("GamesAdapter", "Error: Unable to get the activity context");
+                }
+               
+               
+                // ...
             }
         });
 
@@ -123,10 +158,29 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
 
     private void deleteGame(String gameId) {
        
+       //
+       if (gameId != null && !gameId.isEmpty()) {
+            DatabaseReference gameRef = databaseReference.child(gameId);
+
+            gameRef.removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(context, "Game excluído com sucesso", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Falha ao excluir game", Toast.LENGTH_SHORT).show();
+                            Log.e("GamesAdapter", "Error deleting Game", e);
+                        }
+                    });
+        } else {
+            Log.e("GamesAdapter", "Error: gameId is null or empty");
+        }
        
-       
-       
-        // ... (similar code as in ArtistaAdapter)
+
     }
 
     public static class GamesViewHolder extends RecyclerView.ViewHolder {
@@ -135,7 +189,8 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
 
         public GamesViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Update the IDs according to your item_games.xml layout
+    
+Id = itemView.findViewById(R.id.txtIdGame);
             Name = itemView.findViewById(R.id.txtNameGame);
             SourceSite = itemView.findViewById(R.id.txtSourceSiteGame);
             Platform = itemView.findViewById(R.id.txtPlatformGame);

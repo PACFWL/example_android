@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Legato"
+        android:theme="@style/Theme.Game"
         tools:targetApi="31">
 
         <activity
@@ -20,10 +20,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Activities for Games -->
-        <activity android:name=".ListGames" />
-        <activity android:name=".ListArtists" />
-    </application>
+    </activity>
+    <activity android:name=".ListGames"/>
+    <activity android:name=".Cadastro_Game"/>
+    <activity android:name=".Entrar"/>
+</application>
+
 
 </manifest>

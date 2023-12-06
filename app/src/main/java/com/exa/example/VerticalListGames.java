@@ -1,4 +1,4 @@
-package com.example.legato;
+package com.exa.example;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
